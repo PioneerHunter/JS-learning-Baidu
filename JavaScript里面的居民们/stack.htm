@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input id="stack-input" type="text">
+    <p id="stack-cont">栈内容：apple;pear</p>
+    <div id="stack-btn">
+        <button id="push-btn">进栈</button>
+        <button id="pop-btn">退栈</button>
+        <button id="font-btn">打印栈顶元素内容</button>
+        <button id="empty-btn">判断栈是否为空</button>
+    </div>
+
+    <script>
+        var stack = ["apple", "pear"];
+        var bt=document.getElementById("stack-btn");
+        bt.addEventListener("click",function(){  // 事件委托
+            var ev=ev||window.event;
+            var t=ev.target||ev.srcElement; // 兼容IE；
+            var elem=document.getElementById("stack-input");
+            var btn=document.getElementsByTagName("button");
+            var p=document.getElementById("stack-cont");
+            switch(t){
+                case btn[0]:
+                    inS(elem.value,p);
+                    break;
+                case btn[1]:
+                    ontS(elem.value,p);
+                    break;
+                case btn[2]:
+                    console.log(stack[stack.length-1]);
+                    // console.log(stack[0]); // 栈顶在数组[0]
+                    break;
+                case btn[3]:
+                    stack[0]?console.log("not NULL"):console.log("NULL");
+                    break;
+            }
+        });
+
+        // 入栈，push
+        function inS(x,y){
+            stack.push(x);
+            y.innerHTML="栈内容："+stack.join("->"); // 栈顶在数组尾
+            // y.innerHTML="栈内容："+stack.join("<-"); 栈顶在数组[0]
+        }
+        // 出栈，pop
+        function ontS(x,y){
+            stack.pop(x);
+            y.innerHTML="栈内容："+stack.join("->");
+        }
+    </script>
+</body>
+
+</html>
